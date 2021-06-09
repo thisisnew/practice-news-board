@@ -3,7 +3,8 @@ package util
 import "github.com/spf13/viper"
 
 type Config struct {
-	HOST string `mapstructure:"host"`
+	Host       string `mapstructure:"host"`
+	Connection string `mapstructure:"connection"`
 }
 
 func LoadConfig(path string) (config Config, err error) {
