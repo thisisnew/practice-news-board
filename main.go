@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/gorilla/mux"
 	"log"
 	"net/http"
 	"practice-news-board-web/handlers"
@@ -14,9 +15,9 @@ func main() {
 		log.Fatal("cannot load config:", err)
 	}
 
-	http.HandleFunc("/", handlers.GetBoardList)
-
-	if err := http.ListenAndServe(config.HOST, nil); err != nil {
+	router := mux.NewRouter()
+	router.HandleFunc("/", handlers.GetBoardList).Methods("GET")
+	if err := http.ListenAndServe(config.HOST, util.HttpHandler(router)); err != nil {
 		log.Fatal("ListenAndServe:", err)
 	}
 }
