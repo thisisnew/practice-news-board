@@ -3,8 +3,9 @@ package messages
 import "practice-news-board-web/models"
 
 type Board struct {
-	Item []models.Board
-	News News
+	Item    []models.Board
+	IsLimit bool
+	News    News
 }
 
 type News struct {

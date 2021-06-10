@@ -9,11 +9,20 @@ import (
 	"practice-news-board-web/models"
 )
 
+const (
+	LIMIT = 5
+)
+
 func GetBoardList(w http.ResponseWriter, r *http.Request) {
 	db := database.GetDB()
 
 	var board []models.Board
-	db.Table(models.Board{}.Table()).Find(&board)
+	result := db.Table(models.Board{}.Table()).Find(&board)
+
+	var isLimit bool
+	if result.RowsAffected == LIMIT {
+		isLimit = true
+	}
 
 	resp, err := http.Get("https://hacker-news.firebaseio.com/v0/item/126809.json?print=pretty")
 	if err != nil {
@@ -31,6 +40,7 @@ func GetBoardList(w http.ResponseWriter, r *http.Request) {
 
 	var items messages.Board
 	items.Item = board
+	items.IsLimit = isLimit
 	items.News = news
 
 	json.NewEncoder(w).Encode(items)
