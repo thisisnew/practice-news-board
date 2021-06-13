@@ -5,7 +5,7 @@ import "practice-news-board-web/models"
 type Board struct {
 	Item    []models.Board
 	IsLimit bool
-	News    News
+	News    []News
 }
 
 type News struct {
