@@ -10,10 +10,6 @@ import (
 	"strconv"
 )
 
-const (
-	LIMIT = 5
-)
-
 func GetBoardList(w http.ResponseWriter, r *http.Request) {
 	db := database.GetDB()
 
@@ -21,7 +17,7 @@ func GetBoardList(w http.ResponseWriter, r *http.Request) {
 	result := db.Table(models.Board{}.Table()).Find(&board)
 
 	var isLimit bool
-	if result.RowsAffected == LIMIT {
+	if result.RowsAffected == messages.DAY_WRITE_LIMIT {
 		isLimit = true
 	}
 

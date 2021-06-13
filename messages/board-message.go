@@ -2,6 +2,10 @@ package messages
 
 import "practice-news-board-web/models"
 
+const (
+	DAY_WRITE_LIMIT = 5
+)
+
 type Board struct {
 	Item    []models.Board
 	IsLimit bool
