@@ -19,6 +19,15 @@ func GetBoardList() []models.Board {
 	return board
 }
 
+func GetBoardDetail(id string) models.Board {
+	db := database.GetDB()
+
+	board := models.Board{}
+	db.Table(models.Board{}.Table()).Find(&board, id)
+
+	return board
+}
+
 func GetLatestNews() []messages.News {
 	resp, err := http.Get("https://hacker-news.firebaseio.com/v0/newstories.json?print=pretty")
 	if err != nil {
