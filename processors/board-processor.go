@@ -10,19 +10,19 @@ import (
 	"strconv"
 )
 
-func GetBoardList() []models.Board {
+func GetBoardList() []messages.Board {
 	db := database.GetDB()
 
-	var board []models.Board
+	var board []messages.Board
 	db.Table(models.Board{}.Table()).Find(&board)
 
 	return board
 }
 
-func GetBoardDetail(id string) models.Board {
+func GetBoardDetail(id string) messages.Board {
 	db := database.GetDB()
 
-	board := models.Board{}
+	board := messages.Board{}
 	db.Table(models.Board{}.Table()).Find(&board, id)
 
 	return board

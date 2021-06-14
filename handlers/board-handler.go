@@ -20,7 +20,7 @@ func GetBoardList(w http.ResponseWriter, r *http.Request) {
 
 	news := processors.GetLatestNews()
 
-	var items messages.Board
+	var items messages.BoardList
 	items.Items = list
 	items.IsLimit = isLimit
 	items.News = news
@@ -40,5 +40,12 @@ func GetBoardDetail(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	json.NewEncoder(w).Encode(board)
+	comments := processors.GetComments()
+
+	boardDetail := messages.BoardDetail{
+		Board:    board,
+		Comments: comments,
+	}
+
+	json.NewEncoder(w).Encode(boardDetail)
 }

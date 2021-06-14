@@ -1,16 +1,27 @@
 package messages
 
-import "practice-news-board-web/models"
-
 const (
 	DAY_WRITE_LIMIT = 5
 )
 
 type Board struct {
-	Items   []models.Board
+	BoardId      string `json:"boardId"`
+	BoardName    string `json:"boardName"`
+	BoardExplain string `json:"boardExplain"`
+	BoardNo      string `json:"boardNo"`
+	BoardState   uint   `json:"boardState"`
+}
+
+type BoardList struct {
+	Items   []Board
 	IsLimit bool
 	News    []News
 	User    User
+}
+
+type BoardDetail struct {
+	Board    Board
+	Comments []Comment
 }
 
 type News struct {
