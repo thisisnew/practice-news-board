@@ -10,6 +10,7 @@ type Board struct {
 	Item    []models.Board
 	IsLimit bool
 	News    []News
+	User    User
 }
 
 type News struct {
