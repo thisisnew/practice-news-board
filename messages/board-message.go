@@ -7,7 +7,7 @@ const (
 )
 
 type Board struct {
-	Item    []models.Board
+	Items   []models.Board
 	IsLimit bool
 	News    []News
 	User    User

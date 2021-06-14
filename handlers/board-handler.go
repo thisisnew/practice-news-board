@@ -20,7 +20,7 @@ func GetBoardList(w http.ResponseWriter, r *http.Request) {
 	news := processors.GetLatestNews()
 
 	var items messages.Board
-	items.Item = list
+	items.Items = list
 	items.IsLimit = isLimit
 	items.News = news
 	items.User = user
