@@ -18,3 +18,12 @@ func GetUser() messages.User {
 
 	return user
 }
+
+func GetUserById(userId string) models.User {
+	db := database.GetDB()
+
+	var user models.User
+	db.Table(models.User{}.Table()).Where("user_id = ?", userId).Find(&user)
+
+	return user
+}
