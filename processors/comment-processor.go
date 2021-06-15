@@ -18,8 +18,7 @@ func GetComments(boardId string) []messages.Comment {
 
 	for _, c := range data {
 		commenter := GetUserById(c.CommenterId)
-
-		commment := messages.Comment{
+		comments = append(comments, messages.Comment{
 			CommentId: c.CommentId,
 			Commenter: messages.Commenter{
 				Rank: commenter.UserRank,
@@ -30,9 +29,7 @@ func GetComments(boardId string) []messages.Comment {
 			UpdateDate:  c.UpdateDate.Format(layout),
 			CommentHide: c.CommentHide,
 			BoardId:     c.BoardId,
-		}
-
-		comments = append(comments, commment)
+		})
 	}
 
 	return comments
