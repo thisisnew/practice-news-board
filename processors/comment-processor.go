@@ -6,11 +6,11 @@ import (
 	"practice-news-board-web/models"
 )
 
-func GetComments() []messages.Comment {
+func GetComments(boardId string) []messages.Comment {
 	db := database.GetDB()
 
 	var comments []messages.Comment
-	db.Table(models.Comment{}.Table()).Find(&comments)
+	db.Table(models.Comment{}.Table()).Where("board_id = ?", boardId).Find(&comments)
 
 	return comments
 }

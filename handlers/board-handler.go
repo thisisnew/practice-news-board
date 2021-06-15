@@ -40,7 +40,7 @@ func GetBoardDetail(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	comments := processors.GetComments()
+	comments := processors.GetComments(id)
 
 	boardDetail := messages.BoardDetail{
 		Board:    board,
