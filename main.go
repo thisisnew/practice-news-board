@@ -17,7 +17,8 @@ func main() {
 
 	router := mux.NewRouter()
 	router.HandleFunc("/board", handlers.GetBoardList).Methods("GET")
-	router.HandleFunc("/board/{boardId}", handlers.GetBoardDetail).Methods("GET")
+	router.HandleFunc("/board/{boardId}", handlers.GetBoard).Methods("GET")
+	router.HandleFunc("/board/{boardId}/{}", handlers.GetBoardDetail).Methods("GET")
 
 	if err := http.ListenAndServe(config.Host, util.HttpHandler(router)); err != nil {
 		log.Fatal("ListenAndServe:", err)

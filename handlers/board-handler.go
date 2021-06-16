@@ -8,7 +8,7 @@ import (
 	"practice-news-board-web/processors"
 )
 
-func GetBoardList(w http.ResponseWriter, r *http.Request) {
+func GetBoard(w http.ResponseWriter, r *http.Request) {
 	user := GetUser()
 
 	list := processors.GetBoardList()
