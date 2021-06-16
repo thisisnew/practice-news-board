@@ -10,7 +10,7 @@ type Comment struct {
 	Contents    string
 	CreateDate  time.Time
 	UpdateDate  time.Time
-	BoardId     string
+	PostId      string
 	CommenterId string
 }
 

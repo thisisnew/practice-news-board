@@ -27,7 +27,7 @@ func GetComments(boardId string) []messages.Comment {
 			CreateDate:  c.CreateDate.Format(util.TIME_LAYOUT_YYYY_MM_DD_HH_MM_SS),
 			UpdateDate:  c.UpdateDate.Format(util.TIME_LAYOUT_YYYY_MM_DD_HH_MM_SS),
 			CommentHide: c.CommentHide,
-			BoardId:     c.BoardId,
+			BoardId:     c.PostId,
 		})
 	}
 
