@@ -19,9 +19,9 @@ func main() {
 	router.HandleFunc("/auth/login", handlers.Login).Methods("POST")
 	router.HandleFunc("/auth/refresh", handlers.Refresh).Methods("GET")
 
-	router.HandleFunc("/board", handlers.GetBoardGroups).Methods("GET")
-	router.HandleFunc("/board/{groupId}", handlers.GetBoardList).Methods("GET")
-	router.HandleFunc("/board/{groupId}/{postId}", handlers.GetPost).Methods("GET")
+	router.HandleFunc("/boards", handlers.GetBoardGroups).Methods("GET")
+	router.HandleFunc("/boards/{groupId}", handlers.GetBoardList).Methods("GET")
+	router.HandleFunc("/boards/{groupId}/board/{postId}", handlers.GetPost).Methods("GET")
 
 	if err := http.ListenAndServe(config.Host, util.HttpHandler(router)); err != nil {
 		log.Fatal("ListenAndServe:", err)
