@@ -16,6 +16,9 @@ func main() {
 	}
 
 	router := mux.NewRouter()
+	router.HandleFunc("/auth/login", handlers.Login).Methods("POST")
+	router.HandleFunc("/auth/refresh", handlers.Refresh)
+
 	router.HandleFunc("/board", handlers.GetBoardList).Methods("GET")
 	router.HandleFunc("/board/{boardId}", handlers.GetBoard).Methods("GET")
 	router.HandleFunc("/board/{boardId}/{postId}", handlers.GetPost).Methods("GET")
