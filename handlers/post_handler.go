@@ -10,19 +10,14 @@ import (
 
 func GetPost(w http.ResponseWriter, r *http.Request) {
 	p := mux.Vars(r)
-	id := p["boardId"]
+	postId := p["postId"]
 
-	board := processors.GetBoardDetail(id)
+	post := processors.GetPost(postId)
 
-	if board.BoardId == "" {
-		json.NewEncoder(w).Encode(map[string]string{"result": "데이터가 없습니다."})
-		return
-	}
-
-	comments := processors.GetComments(id)
+	comments := processors.GetComments(postId)
 
 	boardDetail := messages.BoardDetail{
-		Board:    board,
+		Post:     post,
 		Comments: comments,
 	}
 

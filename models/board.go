@@ -1,11 +1,11 @@
 package models
 
 type Board struct {
-	BoardId      string `json:"boardId"`
-	BoardName    string `json:"boardName"`
-	BoardExplain string `json:"boardExplain"`
-	BoardNo      string `json:"boardNo"`
-	BoardState   uint   `json:"boardState"`
+	BoardId      string
+	BoardName    string
+	BoardExplain string
+	BoardNo      string
+	BoardState   uint
 }
 
 func (Board) Table() string {

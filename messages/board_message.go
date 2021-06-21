@@ -10,17 +10,17 @@ type Board struct {
 	BoardExplain string `json:"boardExplain"`
 	BoardNo      string `json:"boardNo"`
 	BoardState   uint   `json:"boardState"`
+	GroupId      string `json:"groupId"`
 }
 
 type BoardList struct {
 	Items   []Board
 	IsLimit bool
-	News    []News
 	User    User
 }
 
 type BoardDetail struct {
-	Board    Board
+	Post     Board
 	Comments []Comment
 }
 

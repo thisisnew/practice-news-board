@@ -1,8 +1,9 @@
 package models
 
 type BoardGroup struct {
-	ConfigId string
-	BoardId  string
+	BoardGroupId string
+	GroupId      string
+	Board        Board
 }
 
 func (BoardGroup) Table() string {

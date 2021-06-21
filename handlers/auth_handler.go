@@ -5,6 +5,7 @@ import (
 	"github.com/dgrijalva/jwt-go"
 	"net/http"
 	"practice-news-board-web/processors"
+	util "practice-news-board-web/utils"
 	"time"
 )
 
@@ -13,12 +14,12 @@ const userStateTrue = true
 var jwtKey = []byte("secret_key")
 
 type Credentials struct {
-	Username string `json:"username"`
-	Password string `json:"password"`
+	UserEmail string `json:"userEmail"`
+	Password  string `json:"password"`
 }
 
 type Claims struct {
-	Username string `json:"username"`
+	UserEmail string `json:"userEmail"`
 	jwt.StandardClaims
 }
 
@@ -30,7 +31,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	user := processors.GetUser(credentials.Username, credentials.Password, userStateTrue)
+	user := processors.GetUser(credentials.UserEmail, credentials.Password, userStateTrue)
 
 	if !user.IsLogin {
 		w.WriteHeader(http.StatusUnauthorized)
@@ -40,7 +41,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	expirationTime := time.Now().Add(time.Minute * 5)
 
 	claims := &Claims{
-		Username: user.UserName,
+		UserEmail: user.UserEmail,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: expirationTime.Unix(),
 		},
@@ -61,6 +62,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 			Expires: expirationTime,
 		})
 
+	util.Redirect(w, r, "/board", 8080)
 }
 
 func Refresh(w http.ResponseWriter, r *http.Request) {

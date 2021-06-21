@@ -6,11 +6,11 @@ import (
 	"practice-news-board-web/models"
 )
 
-func GetPost(id string) messages.Board {
+func GetPost(postId string) messages.Board {
 	db := database.GetDB()
 
 	board := messages.Board{}
-	db.Table(models.Board{}.Table()).Find(&board, id)
+	db.Table(models.Board{}.Table()).Find(&board, postId)
 
 	return board
 }

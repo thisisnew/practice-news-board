@@ -7,13 +7,13 @@ import (
 	util "practice-news-board-web/utils"
 )
 
-func GetComments(boardId string) []messages.Comment {
+func GetComments(postId string) []messages.Comment {
 	db := database.GetDB()
 
 	var comments []messages.Comment
 
 	var data []models.Comment
-	db.Table(models.Comment{}.Table()).Where("board_id = ?", boardId).Find(&data)
+	db.Table(models.Comment{}.Table()).Where("post_id = ?", postId).Find(&data)
 
 	for _, c := range data {
 		commenter := GetUserById(c.CommenterId)

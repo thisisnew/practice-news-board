@@ -37,3 +37,6 @@ func HttpHandler(handler http.Handler) http.Handler {
 		handler.ServeHTTP(w, r)
 	})
 }
+func Redirect(w http.ResponseWriter, r *http.Request, url string, port int) {
+	http.Redirect(w, r, url, port)
+}
