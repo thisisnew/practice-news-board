@@ -10,10 +10,10 @@ import (
 	"strconv"
 )
 
-func GetBoardList(groupId string) []messages.Board {
+func GetBoardList(groupId string) []models.Board {
 	db := database.GetDB()
 
-	var board []messages.Board
+	var board []models.Board
 	db.Table(models.Board{}.Table()).Where("group_id = ?", groupId).Find(&board)
 
 	return board
