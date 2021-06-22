@@ -11,13 +11,19 @@ import (
 func GetBoardGroups(w http.ResponseWriter, r *http.Request) {
 	var items messages.BoardGroup
 
+	boardGroups := processors.GetBoardGroups(true)
+
+	for _, bg := range boardGroups {
+		board := processors.GetBoardList(bg.GroupId)
+		for _, b := range board {
+			items.Items = append(items.Items, b)
+		}
+	}
+	items.News = processors.GetLatestNews()
+
 	cookie, err := r.Cookie("board-web-token")
 	if err != nil {
-		if err == http.ErrNoCookie {
-			w.WriteHeader(http.StatusUnauthorized)
-			return
-		}
-		w.WriteHeader(http.StatusBadRequest)
+		json.NewEncoder(w).Encode(items)
 		return
 	}
 
@@ -44,17 +50,6 @@ func GetBoardGroups(w http.ResponseWriter, r *http.Request) {
 			UserEmail: claims.UserEmail,
 		}
 	}
-
-	boardGroups := processors.GetBoardGroups(true)
-
-	for _, bg := range boardGroups {
-		board := processors.GetBoardList(bg.GroupId)
-		for _, b := range board {
-			items.Items = append(items.Items, b)
-		}
-	}
-
-	items.News = processors.GetLatestNews()
 
 	json.NewEncoder(w).Encode(items)
 }
