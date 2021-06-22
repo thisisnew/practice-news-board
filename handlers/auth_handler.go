@@ -5,7 +5,6 @@ import (
 	"github.com/dgrijalva/jwt-go"
 	"net/http"
 	"practice-news-board-web/processors"
-	util "practice-news-board-web/utils"
 	"time"
 )
 
@@ -14,7 +13,7 @@ const userStateTrue = true
 var jwtKey = []byte("secret_key")
 
 type Credentials struct {
-	UserEmail string `json:"userEmail"`
+	UserEmail string `json:"user_email"`
 	Password  string `json:"password"`
 }
 
@@ -62,7 +61,8 @@ func Login(w http.ResponseWriter, r *http.Request) {
 			Expires: expirationTime,
 		})
 
-	util.Redirect(w, r, "/board", 8080)
+	w.WriteHeader(http.StatusOK)
+	return
 }
 
 func Refresh(w http.ResponseWriter, r *http.Request) {
