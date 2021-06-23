@@ -23,3 +23,51 @@ func GetPost(w http.ResponseWriter, r *http.Request) {
 
 	json.NewEncoder(w).Encode(boardDetail)
 }
+
+func InsertPost(w http.ResponseWriter, r *http.Request) {
+	p := mux.Vars(r)
+	postId := p["postId"]
+
+	post := processors.GetPost(postId)
+
+	comments := processors.GetComments(postId)
+
+	boardDetail := messages.BoardDetail{
+		Post:     post,
+		Comments: comments,
+	}
+
+	json.NewEncoder(w).Encode(boardDetail)
+}
+
+func UpdatePost(w http.ResponseWriter, r *http.Request) {
+	p := mux.Vars(r)
+	postId := p["postId"]
+
+	post := processors.GetPost(postId)
+
+	comments := processors.GetComments(postId)
+
+	boardDetail := messages.BoardDetail{
+		Post:     post,
+		Comments: comments,
+	}
+
+	json.NewEncoder(w).Encode(boardDetail)
+}
+
+func DeletePost(w http.ResponseWriter, r *http.Request) {
+	p := mux.Vars(r)
+	postId := p["postId"]
+
+	post := processors.GetPost(postId)
+
+	comments := processors.GetComments(postId)
+
+	boardDetail := messages.BoardDetail{
+		Post:     post,
+		Comments: comments,
+	}
+
+	json.NewEncoder(w).Encode(boardDetail)
+}

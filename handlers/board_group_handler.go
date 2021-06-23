@@ -54,7 +54,79 @@ func GetBoardGroups(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(items)
 }
 
-func InsertBoard(w http.ResponseWriter, r *http.Request) {
+func InsertBoardGroup(w http.ResponseWriter, r *http.Request) {
+	cookie, err := r.Cookie("board-web-token")
+	if err != nil {
+		if err == http.ErrNoCookie {
+			w.WriteHeader(http.StatusUnauthorized)
+			return
+		}
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	tokenStr := cookie.Value
+
+	claims := &Claims{}
+
+	tkn, err := jwt.ParseWithClaims(tokenStr, claims,
+		func(t *jwt.Token) (interface{}, error) {
+			return jwtKey, nil
+		})
+
+	if err != nil {
+		if err == jwt.ErrSignatureInvalid {
+			w.WriteHeader(http.StatusUnauthorized)
+			return
+		}
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	if !tkn.Valid {
+		w.WriteHeader(http.StatusUnauthorized)
+		return
+	}
+	///////////////////////////
+}
+
+func UpdateBoardGroup(w http.ResponseWriter, r *http.Request) {
+	cookie, err := r.Cookie("board-web-token")
+	if err != nil {
+		if err == http.ErrNoCookie {
+			w.WriteHeader(http.StatusUnauthorized)
+			return
+		}
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	tokenStr := cookie.Value
+
+	claims := &Claims{}
+
+	tkn, err := jwt.ParseWithClaims(tokenStr, claims,
+		func(t *jwt.Token) (interface{}, error) {
+			return jwtKey, nil
+		})
+
+	if err != nil {
+		if err == jwt.ErrSignatureInvalid {
+			w.WriteHeader(http.StatusUnauthorized)
+			return
+		}
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	if !tkn.Valid {
+		w.WriteHeader(http.StatusUnauthorized)
+		return
+	}
+	///////////////////////////
+}
+
+func DeleteBoardGroup(w http.ResponseWriter, r *http.Request) {
 	cookie, err := r.Cookie("board-web-token")
 	if err != nil {
 		if err == http.ErrNoCookie {
