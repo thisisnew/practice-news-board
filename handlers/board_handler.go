@@ -51,7 +51,7 @@ func GetBoardList(w http.ResponseWriter, r *http.Request) {
 	boardList := processors.GetBoardList(groupId)
 
 	var isLimit bool
-	if len(boardList) == messages.DAY_WRITE_LIMIT {
+	if len(boardList) == messages.DayWriteLimit {
 		isLimit = true
 	}
 

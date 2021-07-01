@@ -3,7 +3,7 @@ package messages
 import "practice-news-board-web/models"
 
 const (
-	DAY_WRITE_LIMIT = 5
+	DayWriteLimit = 5
 )
 
 type Board struct {
